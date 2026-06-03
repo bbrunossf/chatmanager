@@ -60,7 +60,7 @@ export default function Home() {
   return (
     <div className="flex h-screen bg-background">
       {/* Sidebar */}
-      <div className="w-full md:w-1/4 flex flex-col border-r border-border">
+      <div className="w-full md:w-1/4 flex flex-col border-r border-border overflow-y-scroll">
         <ConversationSidebar
           conversations={conversations}
           selectedId={selectedId}
@@ -75,12 +75,12 @@ export default function Home() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 hidden md:flex flex-col">
+      <div className="flex-1 hidden md:flex flex-col overflow-y-scroll">
         <ConversationViewer conversation={selectedConversation || null} />
       </div>
 
       {/* Mobile View */}
-      <div className="flex-1 md:hidden flex flex-col">
+      <div className="flex-1 md:hidden flex flex-col overflow-y-scroll">
         {selectedConversation ? (
           <ConversationViewer conversation={selectedConversation} />
         ) : (

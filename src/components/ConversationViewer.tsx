@@ -28,6 +28,46 @@ function getAuthorInfo(message: Message) {
   };
 }
 
+function getMessageText(message: Message): string {
+  const content = message.content;
+  if (!content?.parts) return 'Mensagem vazia';
+
+  // Conteúdo de texto simples
+  if (content.content_type === 'text') {
+    return content.parts[0] || 'Mensagem vazia';
+  }
+
+  // Conteúdo multimodal (ex: áudio com transcrição)
+  if (content.content_type === 'multimodal_text') {
+    const transcriptionPart = content.parts.find(
+      (part: unknown) =>
+        typeof part === 'object' &&
+        part !== null &&
+        (part as Record<string, unknown>).content_type === 'audio_transcription' &&
+        typeof (part as Record<string, unknown>).text === 'string'
+    ) as { text: string } | undefined;
+
+    if (transcriptionPart) {
+      return transcriptionPart.text;
+    }
+
+    // Fallback: procura qualquer part que tenha a chave "text"
+    const anyTextPart = content.parts.find(
+      (part: unknown) =>
+        typeof part === 'object' &&
+        part !== null &&
+        typeof (part as Record<string, unknown>).text === 'string'
+    ) as { text: string } | undefined;
+
+    if (anyTextPart) {
+      return anyTextPart.text;
+    }
+  }
+
+  return 'Mensagem vazia';
+}
+
+
 export default function ConversationViewer({ conversation }: ConversationViewerProps) {
   if (!conversation) {
     return (
@@ -105,9 +145,10 @@ export default function ConversationViewer({ conversation }: ConversationViewerP
 
                     <Card className="bg-card border border-border p-4">
                       <div className="text-sm text-card-foreground whitespace-pre-wrap break-words">
-                        {message.content?.parts?.[0] || 'Mensagem vazia'}
+                        {getMessageText(message)}
                       </div>
                     </Card>
+
                   </div>
                 </div>
               );
