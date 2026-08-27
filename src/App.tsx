@@ -1,6 +1,7 @@
 import { useConversationManager } from './hooks/useConversationManager';
 import ConversationSidebar from './components/ConversationSidebar';
 import ConversationViewer from './components/ConversationViewer';
+import { Toaster } from './components/ui/sonner';
 import { useEffect } from 'react';
 
 /**
@@ -14,14 +15,22 @@ import { useEffect } from 'react';
 export default function Home() {
   const {
     conversations,
-    filteredConversations,
     selectedConversation,
     selectedId,
     searchQuery,
     setSearchQuery,
     setSelectedId,
+    fileName,
     loadFromFile,
-    deleteConversation,
+    deleteConversations,
+    addTag,
+    removeTag,
+    addTagsToConversations,
+    renameTag,
+    deleteTag,
+    allTags,
+    includeTagsInExport,
+    setIncludeTagsInExport,
     exportConversation,
     exportAllConversations,
   } = useConversationManager();
@@ -29,18 +38,23 @@ export default function Home() {
   // Carregar dados de exemplo do localStorage se disponível
   useEffect(() => {
     const savedConversations = localStorage.getItem('chatgpt_conversations');
+    const savedFileName = localStorage.getItem('chatgpt_conversations_filename');
     if (savedConversations && conversations.length === 0) {
       try {
         const data = JSON.parse(savedConversations);
-        const file = new File([JSON.stringify(data)], 'conversations.json', {
-          type: 'application/json',
-        });
-        loadFromFile(file);
+        const file = new File(
+          [JSON.stringify(data)],
+          savedFileName ?? 'conversations.json',
+          {
+            type: 'application/json',
+          }
+        );
+        loadFromFile(file, savedFileName ?? undefined);
       } catch (error) {
         console.error('Erro ao carregar conversas salvas:', error);
       }
     }
-  }, []);
+  }, [conversations.length, loadFromFile]);
 
   // Salvar conversas no localStorage sempre que mudarem
   useEffect(() => {
@@ -52,10 +66,14 @@ export default function Home() {
         update_time: conv.update_time,
         mapping: conv.mapping,
         current_node: conv.current_node,
+        tags: conv.tags ?? [],
       }));
       localStorage.setItem('chatgpt_conversations', JSON.stringify(dataToSave));
+      if (fileName) {
+        localStorage.setItem('chatgpt_conversations_filename', fileName);
+      }
     }
-  }, [conversations]);
+  }, [conversations, fileName]);
 
   return (
     <div className="flex h-screen bg-background">
@@ -65,24 +83,39 @@ export default function Home() {
           conversations={conversations}
           selectedId={selectedId}
           searchQuery={searchQuery}
+          fileName={fileName}
           onSearchChange={setSearchQuery}
           onSelectConversation={setSelectedId}
-          onDeleteConversation={deleteConversation}
+          onDeleteConversations={deleteConversations}
           onExportConversation={exportConversation}
           onLoadFile={loadFromFile}
           onExportAll={exportAllConversations}
+          allTags={allTags}
+          onAddTagsToConversations={addTagsToConversations}
+          onRenameTag={renameTag}
+          onDeleteTag={deleteTag}
+          includeTagsInExport={includeTagsInExport}
+          onIncludeTagsInExportChange={setIncludeTagsInExport}
         />
       </div>
 
       {/* Main Content */}
       <div className="flex-1 hidden md:flex flex-col overflow-y-scroll">
-        <ConversationViewer conversation={selectedConversation || null} />
+        <ConversationViewer
+          conversation={selectedConversation || null}
+          onAddTag={addTag}
+          onRemoveTag={removeTag}
+        />
       </div>
 
       {/* Mobile View */}
       <div className="flex-1 md:hidden flex flex-col overflow-y-scroll">
         {selectedConversation ? (
-          <ConversationViewer conversation={selectedConversation} />
+          <ConversationViewer
+            conversation={selectedConversation}
+            onAddTag={addTag}
+            onRemoveTag={removeTag}
+          />
         ) : (
           <div className="flex-1 flex items-center justify-center">
             <div className="text-center">
@@ -91,6 +124,8 @@ export default function Home() {
           </div>
         )}
       </div>
+
+      <Toaster />
     </div>
   );
 }
