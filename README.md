@@ -144,9 +144,6 @@ chatmanager/
 
 As **versões exatas** estão em [`package.json`](./package.json) — deliberadamente não repetidas aqui, para não envelhecerem no README.
 
-> Duas dependências declaradas no `package.json` — `wouter` e `zod` — **não são importadas em
-> nenhum arquivo de `src/`**: são resíduos de versões anteriores e podem ser removidas.
-
 ## 🌐 Deploy
 
 A aplicação é 100% client-side (arquivos estáticos em `dist/`), então qualquer host estático serve.
@@ -276,7 +273,7 @@ Observações de compatibilidade:
 
 ## 📄 Licença
 
-MIT.
+MIT — veja [LICENSE](./LICENSE).
 
 ---
 
