@@ -31,16 +31,8 @@ Uma aplicação React moderna e responsiva para gerenciar, visualizar, buscar, d
 
 ```bash
 # Clone o repositório
-git clone <seu-repositorio>
-cd chatgpt-manager
-
-# Renomear arquivos standalone
-cp package.json.standalone package.json
-cp vite.config.standalone.ts vite.config.ts
-cp tsconfig.standalone.json tsconfig.json
-cp tailwind.config.standalone.ts tailwind.config.ts
-cp postcss.config.standalone.js postcss.config.js
-cp .gitignore.standalone .gitignore
+git clone https://github.com/bbrunossf/chatmanager.git
+cd chatmanager
 
 # Instalar dependências
 pnpm install
@@ -109,15 +101,8 @@ chatgpt-manager/
 │   │   └── index.css       # Estilos globais
 │   ├── public/             # Assets estáticos (+ sample_conversations.json)
 │   └── index.html
-├── package.json.standalone
-├── vite.config.standalone.ts
-├── tsconfig.standalone.json
-├── tailwind.config.standalone.ts
-├── postcss.config.standalone.js
 ├── GUIA_USO.md
-├── README_DEV.md
-├── INSTALACAO_STANDALONE.md
-└── README.standalone.md
+└── README_DEV.md
 ```
 
 ## 🛠️ Stack Tecnológico
@@ -189,7 +174,6 @@ docker run -p 3000:3000 chatgpt-manager
 
 - **[GUIA_USO.md](./GUIA_USO.md)** - Guia completo de uso
 - **[README_DEV.md](./README_DEV.md)** - Documentação técnica
-- **[INSTALACAO_STANDALONE.md](./INSTALACAO_STANDALONE.md)** - Instruções de instalação
 
 ## 🧪 Teste com Exemplo
 
