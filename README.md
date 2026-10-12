@@ -107,14 +107,13 @@ chatgpt-manager/
 │   │   ├── App.tsx         # Componente raiz
 │   │   ├── main.tsx        # Entry point
 │   │   └── index.css       # Estilos globais
-│   ├── public/             # Assets estáticos
+│   ├── public/             # Assets estáticos (+ sample_conversations.json)
 │   └── index.html
 ├── package.json.standalone
 ├── vite.config.standalone.ts
 ├── tsconfig.standalone.json
 ├── tailwind.config.standalone.ts
 ├── postcss.config.standalone.js
-├── sample_conversations.json
 ├── GUIA_USO.md
 ├── README_DEV.md
 ├── INSTALACAO_STANDALONE.md
@@ -194,7 +193,9 @@ docker run -p 3000:3000 chatgpt-manager
 
 ## 🧪 Teste com Exemplo
 
-Um arquivo `sample_conversations.json` está incluído com 3 conversas de exemplo para testar todas as funcionalidades.
+A aplicação **carrega automaticamente** os dados de exemplo ao abrir, sempre que não houver conversas salvas no navegador: são **6 conversas sintéticas** (40 mensagens), criadas para demonstração, sem nenhum dado pessoal. O arquivo fica em **[`public/sample_conversations.json`](./public/sample_conversations.json)**.
+
+Para testar com o seu próprio export, use o botão **Carregar JSON** — o arquivo carregado substitui os exemplos.
 
 ## 💾 Persistência de Dados
 
@@ -218,7 +219,7 @@ pnpm dev -- --port 3000
 ### Erro ao carregar JSON
 - Verifique se o arquivo é JSON válido
 - Certifique-se de que foi exportado corretamente do ChatGPT
-- Teste com `sample_conversations.json`
+- Teste com o exemplo em `public/sample_conversations.json`
 
 ## 📄 Licença
 

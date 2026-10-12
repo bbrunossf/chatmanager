@@ -1,0 +1,1330 @@
+[
+  {
+    "title": "Ajuste de layout em componente de lista",
+    "create_time": 1772615551.0,
+    "update_time": 1772615941.0,
+    "mapping": {
+      "4b56032e4214dd2138217c62f3c98fbe": {
+        "id": "4b56032e4214dd2138217c62f3c98fbe",
+        "message": null,
+        "parent": null
+      },
+      "44594d6779cbe2c5fbec9afb1dede564": {
+        "id": "44594d6779cbe2c5fbec9afb1dede564",
+        "message": {
+          "id": "01bbdd0f0304b9cee401eca269c54355",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1772615551.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Tenho um componente de sidebar em React que ficou ruim no mobile: o título quebra em três linhas e o botão de ação fica embaixo do texto. Como resolvo com Tailwind?"
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "4b56032e4214dd2138217c62f3c98fbe"
+      },
+      "d43e7260529006bdd691c7944a5c8274": {
+        "id": "d43e7260529006bdd691c7944a5c8274",
+        "message": {
+          "id": "7c94195bd8751b5cf471223e50a015e2",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1772615598.75,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "O caminho mais direto é separar quem manda no eixo horizontal: título com `min-w-0` e o botão com `shrink-0`. Sem isso, o flexbox deixa o texto empurrar o botão para fora.\n\n```tsx\n<div className=\"flex items-center gap-3\">\n  <h2 className=\"min-w-0 flex-1 truncate text-sm font-medium\">\n    {titulo}\n  </h2>\n  <button className=\"shrink-0 rounded-md bg-accent px-2 py-1 text-xs\">\n    Exportar\n  </button>\n</div>\n```\n\nO `min-w-0` é o detalhe que quase todo mundo esquece: por padrão um item de flex tem `min-width: auto`, o que impede o `truncate` de funcionar."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "44594d6779cbe2c5fbec9afb1dede564"
+      },
+      "36f628a185356e87e2020f4f5e89cdc4": {
+        "id": "36f628a185356e87e2020f4f5e89cdc4",
+        "message": {
+          "id": "3c31c021f2cac24924530c0d2bce6195",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1772615647.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Funcionou. E se eu quiser que o título use duas linhas no desktop e uma só no mobile?"
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "d43e7260529006bdd691c7944a5c8274"
+      },
+      "cfb028f586d9d1d5051b0e6753f8c6a6": {
+        "id": "cfb028f586d9d1d5051b0e6753f8c6a6",
+        "message": {
+          "id": "ed8317b6460164c44c70c08b4e791147",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1772615695.75,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Aí você troca o truncamento por um limite responsivo:\n\n```tsx\n<h2 className=\"min-w-0 flex-1 text-sm font-medium line-clamp-1 sm:line-clamp-2\">\n```\n\n`line-clamp-1` como base (mobile) e `sm:line-clamp-2` a partir de 640px. Continua precisando do `min-w-0` no pai."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "36f628a185356e87e2020f4f5e89cdc4"
+      },
+      "bbf6f88f10c47b1a5e0fd0583c7862e8": {
+        "id": "bbf6f88f10c47b1a5e0fd0583c7862e8",
+        "message": {
+          "id": "ea81f67bca6a10af67d0d25299bb6fb3",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1772615745.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Perfeito, obrigado."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "cfb028f586d9d1d5051b0e6753f8c6a6"
+      },
+      "686daff6bf49c981082dbc9d610a1b28": {
+        "id": "686daff6bf49c981082dbc9d610a1b28",
+        "message": {
+          "id": "846ce1dbd1b5a0bb1257075c271833c0",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1772615794.75,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "De nada! Se quiser, o próximo passo natural é extrair esse bloco para um componente próprio — assim o comportamento responsivo fica em um lugar só."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "bbf6f88f10c47b1a5e0fd0583c7862e8"
+      }
+    },
+    "current_node": "686daff6bf49c981082dbc9d610a1b28",
+    "conversation_id": "104791313b7065741566f878a906ed96",
+    "conversation_template_id": null,
+    "default_model_slug": "gpt-4o",
+    "id": "104791313b7065741566f878a906ed96",
+    "is_archived": false,
+    "is_do_not_remember": false,
+    "is_read_only": false,
+    "is_starred": false,
+    "is_study_mode": false,
+    "memory_scope": "global_enabled",
+    "pinned_time": null,
+    "plugin_ids": null,
+    "voice": null
+  },
+  {
+    "title": "Consolidar planilhas de acompanhamento em uma base única",
+    "create_time": 1768831387.0,
+    "update_time": 1768831957.0,
+    "mapping": {
+      "e7f8a9592996bfe82af81cfe6bc6f323": {
+        "id": "e7f8a9592996bfe82af81cfe6bc6f323",
+        "message": null,
+        "parent": null
+      },
+      "084430b1b97c7e537bed2ed6f770b6d9": {
+        "id": "084430b1b97c7e537bed2ed6f770b6d9",
+        "message": {
+          "id": "05ef5a62f4d00600fe44f8c19afa007b",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1768831387.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Recebo cerca de 300 planilhas por mês, cada uma de um acompanhamento diferente, com o mesmo formulário. Quero consolidar tudo em um DataFrame. Como faço isso de forma robusta?"
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "e7f8a9592996bfe82af81cfe6bc6f323"
+      },
+      "f45bb96a9c514be018dc6ac5ecc85588": {
+        "id": "f45bb96a9c514be018dc6ac5ecc85588",
+        "message": {
+          "id": "3723c8653114071af675d5e695f491d8",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1768831434.75,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "O ponto crítico não é o `read_excel` — é **tratar as planilhas que não seguem o padrão**. Sugiro três camadas:\n\n1. **descoberta**: listar os arquivos e classificar por estrutura, não por nome;\n2. **extração**: ler por endereço de célula quando o formulário é fixo;\n3. **registro**: gravar cada falha com o motivo, em vez de interromper o lote.\n\n```python\nimport logging\nimport pandas as pd\n\nregistro = logging.getLogger(\"consolidacao\")\nregistro.setLevel(logging.DEBUG)\nregistro.addHandler(logging.FileHandler(\"falhas.log\"))\n\nCOLUNAS = [\"arquivo\", \"nome\", \"data\", \"peso\", \"altura\", \"imc\"]\nlinhas = []\n\nfor caminho in sorted(pasta.glob(\"*.xlsx\")):\n    try:\n        bruto = pd.read_excel(caminho, sheet_name=\"FORMULARIO\", header=None, usecols=\"A:I\")\n    except ValueError as erro:\n        registro.warning(\"%s: %s\", caminho.name, erro)\n        continue\n    linhas.append({\n        \"arquivo\": caminho.name,\n        \"nome\": bruto.iat[6, 1],\n        \"data\": bruto.iat[7, 1],\n        \"peso\": bruto.iat[12, 1],\n        \"altura\": bruto.iat[7, 6],\n        \"imc\": bruto.iat[13, 1],\n    })\n\nbase = pd.DataFrame(linhas, columns=COLUNAS)\n```"
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "084430b1b97c7e537bed2ed6f770b6d9"
+      },
+      "d77ecb454982ea532c75f63a37d77efe": {
+        "id": "d77ecb454982ea532c75f63a37d77efe",
+        "message": {
+          "id": "0e7b9fa4c9977f88791b966dd4e66075",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1768831483.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Vale reforçar a parte que costuma ser ignorada: **guardar o log**. Em uma rodada com 300 arquivos é comum ter 20 ou 30 falhas por motivo repetido (aba com outro nome, célula mesclada, data como texto). Com o log você corrige de uma vez, em vez de descobrir caso a caso."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "f45bb96a9c514be018dc6ac5ecc85588"
+      },
+      "12f31b78a688d52f1ecdfeebec5ada66": {
+        "id": "12f31b78a688d52f1ecdfeebec5ada66",
+        "message": {
+          "id": "bcb44be6fd06b74a5504f15d27cef98f",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1768831531.75,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "E se a planilha tiver a aba certa mas com nome diferente?"
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "d77ecb454982ea532c75f63a37d77efe"
+      },
+      "91625cc31c68c9f54c3954c5b2f2aafe": {
+        "id": "91625cc31c68c9f54c3954c5b2f2aafe",
+        "message": {
+          "id": "6bbf361b6e79d45324deaf92c7cf4eb3",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1768831581.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Aí vale tolerar variações antes de desistir:\n\n```python\nnome_aba = next(\n    (n for n in planilha.sheet_names if \"FORMULARIO\" in n.upper()),\n    None,\n)\nif nome_aba is None:\n    registro.warning(\"%s: nenhuma aba compativel\", caminho.name)\n    continue\nbruto = planilha.parse(nome_aba, header=None, usecols=\"A:I\")\n```\n\nAssim você resolve acento, caixa e sufixos sem manter uma lista de exceções."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "12f31b78a688d52f1ecdfeebec5ada66"
+      },
+      "940eeca6274a73b5ebf9328162c906c2": {
+        "id": "940eeca6274a73b5ebf9328162c906c2",
+        "message": {
+          "id": "a1c79de68bc26943128be8460b3da761",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1768831630.75,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Boa. Vale a pena paralelizar a leitura?"
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "91625cc31c68c9f54c3954c5b2f2aafe"
+      },
+      "dd6fea50ce6ae029e83834980ed3450d": {
+        "id": "dd6fea50ce6ae029e83834980ed3450d",
+        "message": {
+          "id": "f279cad7b51976e58a00aa84d101e5a4",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1768831681.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Para 300 arquivos, **não vale** — o gargalo é o disco, não a CPU, e paralelizar só adiciona complexidade e risco de estourar memória. Só considere a partir de alguns milhares de arquivos, e ainda assim medindo: `time.perf_counter()` em volta do laço resolve a dúvida em cinco minutos."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "940eeca6274a73b5ebf9328162c906c2"
+      },
+      "622374423036c1a2f903565eeb3e7a93": {
+        "id": "622374423036c1a2f903565eeb3e7a93",
+        "message": {
+          "id": "e39bf1fa74fcaa384d8cb8bea2b7c8ef",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1768831731.75,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Faz sentido. Obrigado."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "dd6fea50ce6ae029e83834980ed3450d"
+      },
+      "d404b1d7c6176f74ad64cf36b58b906a": {
+        "id": "d404b1d7c6176f74ad64cf36b58b906a",
+        "message": {
+          "id": "3915bb258388c1c40e63a28f4d2d92e3",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1768831783.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Um último detalhe que evita retrabalho: grave também a **data de modificação** de cada planilha de origem no DataFrame. Quando alguém preencher uma ficha nova, você reprocessa só o que mudou."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "622374423036c1a2f903565eeb3e7a93"
+      }
+    },
+    "current_node": "d404b1d7c6176f74ad64cf36b58b906a",
+    "conversation_id": "7057a6cb5ee8525e416f6ee50195737e",
+    "conversation_template_id": null,
+    "default_model_slug": "gpt-4o",
+    "id": "7057a6cb5ee8525e416f6ee50195737e",
+    "is_archived": false,
+    "is_do_not_remember": false,
+    "is_read_only": false,
+    "is_starred": false,
+    "is_study_mode": false,
+    "memory_scope": "global_enabled",
+    "pinned_time": null,
+    "plugin_ids": null,
+    "voice": null
+  },
+  {
+    "title": "Transcricao de audio de reuniao",
+    "create_time": 1764233110.0,
+    "update_time": 1764233440.0,
+    "mapping": {
+      "35a65bc875bf31f61b0fe2a7c0c0f38e": {
+        "id": "35a65bc875bf31f61b0fe2a7c0c0f38e",
+        "message": null,
+        "parent": null
+      },
+      "edfe3415f92df75d165a10139c14172f": {
+        "id": "edfe3415f92df75d165a10139c14172f",
+        "message": {
+          "id": "c698b703c166f1f01336fc4e33fbd114",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1764233110.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Preciso extrair as decisoes de uma reuniao de projeto. Segue o audio."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "35a65bc875bf31f61b0fe2a7c0c0f38e"
+      },
+      "9f5bf343e9680da6facddf45eb231540": {
+        "id": "9f5bf343e9680da6facddf45eb231540",
+        "message": {
+          "id": "eb738d61b8f7a25bebc39de3c06a3072",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1764233157.75,
+          "update_time": null,
+          "content": {
+            "content_type": "multimodal_text",
+            "parts": [
+              {
+                "content_type": "audio_transcription",
+                "text": "Transcrevi o trecho e separei as decisões:\n\n- a entrega da etapa de levantamento fica para a próxima semana;\n- o orçamento revisado precisa considerar a variação de preço do insumo principal;\n- ficou definido que a conferência de quantitativos passa a ser feita em duas etapas.\n\nQuer que eu transforme isso em uma lista de tarefas com responsável e prazo?"
+              },
+              {
+                "content_type": "audio_asset_pointer",
+                "asset_pointer": "file-service://file-a8c3908e813917b1",
+                "size_bytes": 188416,
+                "metadata": {
+                  "duration": 96.4,
+                  "format": "wav"
+                }
+              }
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "edfe3415f92df75d165a10139c14172f"
+      },
+      "ae46e9a81602f094613c93725696ac37": {
+        "id": "ae46e9a81602f094613c93725696ac37",
+        "message": {
+          "id": "e0bb34a51e82266ba249f0b22c9e5e0f",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1764233206.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Quero. Mas antes: como você lida com audio de baixa qualidade?"
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "9f5bf343e9680da6facddf45eb231540"
+      },
+      "71b92f1302c1aaf45992c8b7cbb9d351": {
+        "id": "71b92f1302c1aaf45992c8b7cbb9d351",
+        "message": {
+          "id": "5126bba8bb420eab430d6b08d972d905",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1764233254.75,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Três medidas ajudam mais que qualquer ajuste no modelo:\n\n1. **normalizar** o volume antes de enviar, para não deixar trechos inaudíveis;\n2. **recortar** o áudio em blocos de até alguns minutos, o que também reduz o custo;\n3. **pedir a transcrição com o vocabulário do domínio**, passando os termos técnicos esperados como contexto.\n\nSe a gravação tiver duas pessoas, vale pedir explicitamente a separação por interlocutor — mesmo que aproximada, ajuda muito na leitura."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "ae46e9a81602f094613c93725696ac37"
+      },
+      "30b0a697088b0b4587beda6dac81633a": {
+        "id": "30b0a697088b0b4587beda6dac81633a",
+        "message": {
+          "id": "259ff00ca38c00ed5e5bb3fd30fbac89",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1764233304.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Boa, vou testar o recorte em blocos."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "71b92f1302c1aaf45992c8b7cbb9d351"
+      }
+    },
+    "current_node": "30b0a697088b0b4587beda6dac81633a",
+    "conversation_id": "fa6409600435e2226c2e267258deb204",
+    "conversation_template_id": null,
+    "default_model_slug": "gpt-4o",
+    "id": "fa6409600435e2226c2e267258deb204",
+    "is_archived": false,
+    "is_do_not_remember": false,
+    "is_read_only": false,
+    "is_starred": false,
+    "is_study_mode": false,
+    "memory_scope": "global_enabled",
+    "pinned_time": null,
+    "plugin_ids": null,
+    "voice": null
+  },
+  {
+    "title": "Sistema antigo com erro de encoding ao ler CSV",
+    "create_time": 1770826968.0,
+    "update_time": 1770827358.0,
+    "mapping": {
+      "d46ad80838b87bb7d2b5e93752710233": {
+        "id": "d46ad80838b87bb7d2b5e93752710233",
+        "message": null,
+        "parent": null
+      },
+      "b63f72dd5e369cd576a1f36b61704289": {
+        "id": "b63f72dd5e369cd576a1f36b61704289",
+        "message": {
+          "id": "5c3418b8251b77dc78912e2698bd3e7d",
+          "author": {
+            "role": "system",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1770826968.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Você é um assistente que ajuda a identificar causas de erro em scripts de leitura de dados."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "d46ad80838b87bb7d2b5e93752710233"
+      },
+      "6935843bf2e06dc88e4396395289f75f": {
+        "id": "6935843bf2e06dc88e4396395289f75f",
+        "message": {
+          "id": "4a48c8b7e354a6992afdc30dc855e231",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1770827015.75,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Meu script quebra só com alguns arquivos. O erro é este:\n\n```\nUnicodeDecodeError: 'utf-8' codec can't decode byte 0xe7 in position 4112\n```\nO que faço?"
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "b63f72dd5e369cd576a1f36b61704289"
+      },
+      "56f57f7f4c472c0cd3e75a57421504c8": {
+        "id": "56f57f7f4c472c0cd3e75a57421504c8",
+        "message": {
+          "id": "c93eb72a6784b8ef0b1b933871d89510",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1770827064.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "O `0xe7` é o byte de `ç` no encoding legado do Windows. Ou seja: o arquivo não é UTF-8. Duas opções, e eu prefiro a segunda:\n\n```python\n# 1) forcar o encoding legado\npd.read_csv(caminho, encoding=\"cp1252\", sep=\";\")\n\n# 2) detectar e registrar o encoding de cada arquivo\ntry:\n    padrao = pd.read_csv(caminho, sep=\";\")\nexcept UnicodeDecodeError:\n    padrao = pd.read_csv(caminho, encoding=\"cp1252\", sep=\";\")\n    registro.warning(\"%s lido como cp1252\", caminho.name)\n```\n\nNo segundo caso você continua lendo UTF-8 quando é UTF-8 e só cai no legado quando precisa — e fica registrado quantos arquivos vieram fora do padrão."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "6935843bf2e06dc88e4396395289f75f"
+      },
+      "42d61525164842af4e5953211c922b48": {
+        "id": "42d61525164842af4e5953211c922b48",
+        "message": {
+          "id": "c274a40ba0dbe2fac73460802c70a268",
+          "author": {
+            "role": "tool",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1770827112.75,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "cp1252\nlatin-1\nutf-8-sig"
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "56f57f7f4c472c0cd3e75a57421504c8"
+      },
+      "f1e5a9dc9527635e97be3b3851c5d423": {
+        "id": "f1e5a9dc9527635e97be3b3851c5d423",
+        "message": {
+          "id": "fcbff79f1d8032f78cb0c2da552607a6",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1770827162.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Também aparece com frequência a variante `utf-8-sig`, quando o arquivo tem BOM no começo: nesse caso a primeira coluna vem com um caractere invisível antes do nome e o `df[\"coluna\"]` falha sem explicar o motivo."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "42d61525164842af4e5953211c922b48"
+      },
+      "86b389da0021c638f24424e851c1c8d0": {
+        "id": "86b389da0021c638f24424e851c1c8d0",
+        "message": {
+          "id": "0ada9c16bf6531c8ef5ffa40657def2f",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1770827211.75,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Era exatamente isso, a primeira coluna estava estranha. Resolvido, obrigado."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "f1e5a9dc9527635e97be3b3851c5d423"
+      }
+    },
+    "current_node": "86b389da0021c638f24424e851c1c8d0",
+    "conversation_id": "34844bb1c09e11fdae435def9f4f4025",
+    "conversation_template_id": null,
+    "default_model_slug": "gpt-4",
+    "id": "34844bb1c09e11fdae435def9f4f4025",
+    "is_archived": false,
+    "is_do_not_remember": false,
+    "is_read_only": false,
+    "is_starred": false,
+    "is_study_mode": false,
+    "memory_scope": "global_enabled",
+    "pinned_time": null,
+    "plugin_ids": null,
+    "voice": null
+  },
+  {
+    "title": "Dimensionar refeicoes com programacao linear",
+    "create_time": 1775644262.0,
+    "update_time": 1775644832.0,
+    "mapping": {
+      "e63128376a043a19a731e6bf7ec3877a": {
+        "id": "e63128376a043a19a731e6bf7ec3877a",
+        "message": null,
+        "parent": null
+      },
+      "5766053f0afb93f2e4141a6338918c9e": {
+        "id": "5766053f0afb93f2e4141a6338918c9e",
+        "message": {
+          "id": "8942f0b5de82eb5a55bb3be677b5d709",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1775644262.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Quero montar uma sequencia de refeicoes que atenda metas nutricionais por faixa de paciente, com o menor custo. Vale usar programacao linear?"
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "e63128376a043a19a731e6bf7ec3877a"
+      },
+      "697d3f2497037517586efeb78207179c": {
+        "id": "697d3f2497037517586efeb78207179c",
+        "message": {
+          "id": "de895f87ba3d49fa1bc3cc41904e0460",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1775644309.75,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Vale, e o problema é bem modelado assim: as variáveis são **quantas porções de cada preparo em cada dia**, as restrições são nutricionais (mínimo e máximo por nutriente) e de variedade, e o objetivo é o custo total.\n\n```python\nimport pulp\n\nproblema = pulp.LpProblem(\"cardapio\", pulp.LpMinimize)\nporcao = {\n    (d, p): pulp.LpVariable(f\"d{d}_p{p}\", lowBound=0, cat=\"Continuous\")\n    for d in dias for p in preparos\n}\nproblema += pulp.lpSum(\n    custo[p] * porcao[d, p] for d in dias for p in preparos\n)\nfor d in dias:\n    for nutriente, meta in metas.items():\n        problema += pulp.lpSum(\n            aporte[p][nutriente] * porcao[d, p] for p in preparos\n        ) >= meta[\"minimo\"]\nproblema.solve(pulp.PULP_CBC_CMD(msg=False, timeLimit=180))\n```"
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "5766053f0afb93f2e4141a6338918c9e"
+      },
+      "b989c7a763decc5403733aec8e3d8976": {
+        "id": "b989c7a763decc5403733aec8e3d8976",
+        "message": {
+          "id": "51932e561dfef8aaa4313c73e24772fc",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1775644358.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Como evito que o resultado fique repetitivo, com o mesmo preparo todos os dias?"
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "697d3f2497037517586efeb78207179c"
+      },
+      "ec83d515cfbf676c090e27aa7ed9478f": {
+        "id": "ec83d515cfbf676c090e27aa7ed9478f",
+        "message": {
+          "id": "96ea9e729a127fa794c4137fb0a32448",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1775644406.75,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Duas formas, e elas respondem a problemas diferentes:\n\n- **restrição dura** — limite de repetições na semana por preparo (garante, mas pode tornar o problema inviável);\n- **penalização no objetivo** — um custo pequeno por repetir, o que o solver evita quando há alternativa.\n\nEu começaria pela penalização: mantém o modelo sempre viável e, na prática, produz uma sequência bem mais variada."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "b989c7a763decc5403733aec8e3d8976"
+      },
+      "64305006a8339a686c20c327c97cd79f": {
+        "id": "64305006a8339a686c20c327c97cd79f",
+        "message": {
+          "id": "eb5717d5ccec9b7953e10cdac6396507",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1775644456.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Complementando: se aparecer inviabilidade, não investigue \"no escuro\". Relaxe uma restrição por vez e veja qual delas estoura — na prática, quase sempre é um mínimo nutricional muito alto para o conjunto de preparos disponível naquele dia."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "ec83d515cfbf676c090e27aa7ed9478f"
+      },
+      "5645c52a78fa933586760547960fcca7": {
+        "id": "5645c52a78fa933586760547960fcca7",
+        "message": {
+          "id": "4d907e31fc4b04690e03104d644eaffe",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1775644505.75,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Faz sentido. E o tempo de resposta?"
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "64305006a8339a686c20c327c97cd79f"
+      },
+      "72d42f55febdba09c45029d0a7901b51": {
+        "id": "72d42f55febdba09c45029d0a7901b51",
+        "message": {
+          "id": "58395ab166f55f378ba7653e23f298c7",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1775644556.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Com `timeLimit` de 180 segundos e `gapRel` de 0,10 você tem solução boa em segundos e um teto para os casos difíceis. Vale medir com um horário de corte no log, porque a curva de melhoria cai rápido depois dos primeiros segundos — e encurtar o tempo é melhor que alongar a espera por uma solução 2% melhor."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "5645c52a78fa933586760547960fcca7"
+      },
+      "91758be4e8c72631a81ec23514b1b257": {
+        "id": "91758be4e8c72631a81ec23514b1b257",
+        "message": {
+          "id": "ddfd73315b773add0e857e9217f9bf8d",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1775644606.75,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Otimo, obrigado."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "72d42f55febdba09c45029d0a7901b51"
+      },
+      "b592593075d794eb11d7ed8adfa572c9": {
+        "id": "b592593075d794eb11d7ed8adfa572c9",
+        "message": {
+          "id": "25401bd6a6ebfafd517426d5c6af1190",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1775644658.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Se quiser, o mesmo modelo aceita restrições de sazonalidade e de sobra de produção: basta uma variável de folga por preparo e dia."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "91758be4e8c72631a81ec23514b1b257"
+      }
+    },
+    "current_node": "b592593075d794eb11d7ed8adfa572c9",
+    "conversation_id": "9c504ad81605f2c8502509c108524f85",
+    "conversation_template_id": null,
+    "default_model_slug": "gpt-4o",
+    "id": "9c504ad81605f2c8502509c108524f85",
+    "is_archived": false,
+    "is_do_not_remember": false,
+    "is_read_only": false,
+    "is_starred": false,
+    "is_study_mode": false,
+    "memory_scope": "global_enabled",
+    "pinned_time": null,
+    "plugin_ids": null,
+    "voice": null
+  },
+  {
+    "title": "Como organizar projetos antigos por assunto",
+    "create_time": 1780167775.0,
+    "update_time": 1780168105.0,
+    "mapping": {
+      "0882835fceb52d2da182fdd2ac87d0a1": {
+        "id": "0882835fceb52d2da182fdd2ac87d0a1",
+        "message": null,
+        "parent": null
+      },
+      "7f6d6e39e640f91e5aaef9399f493a7e": {
+        "id": "7f6d6e39e640f91e5aaef9399f493a7e",
+        "message": {
+          "id": "df8b081cf21d0c2ca676dd728080131e",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1780167775.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Tenho pastas de projetos de vários anos, com copias de arquivos e versões numeradas. Qual a melhor forma de organizar?"
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o-mini",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "0882835fceb52d2da182fdd2ac87d0a1"
+      },
+      "efe928e3dc87c2f14f14a22eafaf2c0e": {
+        "id": "efe928e3dc87c2f14f14a22eafaf2c0e",
+        "message": {
+          "id": "2d5c40a0c882932907fecc3ba3c6d14a",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1780167822.75,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Separe **produto** de **histórico**, e deixe cada um com uma regra simples:\n\n- no produto: só o que é usado hoje, sem data no nome do arquivo, com um `docs/historico.md` contando o que foi tentado e por que foi descartado;\n- no histórico: uma pasta por marco, nomeada por data, com um índice único dizendo o que cada uma era e o que ensinou.\n\nO que faz funcionar é o índice: sem ele, o histórico volta a ser um monte de pastas."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o-mini",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "7f6d6e39e640f91e5aaef9399f493a7e"
+      },
+      "385597008c39bed09f7b740f43bdd0d5": {
+        "id": "385597008c39bed09f7b740f43bdd0d5",
+        "message": {
+          "id": "30a81243848d0aa97a3be7a684505067",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1780167871.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "E as cópias duplicadas no meio disso?"
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o-mini",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "efe928e3dc87c2f14f14a22eafaf2c0e"
+      },
+      "e2be359702a249af427067f52b82ceaa": {
+        "id": "e2be359702a249af427067f52b82ceaa",
+        "message": {
+          "id": "71c0ae45f75fff24805565f255d2e572",
+          "author": {
+            "role": "assistant",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1780167919.75,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Regra prática: **um lugar de edição, um lugar de cópia**. Se dois lugares permitem editar o mesmo projeto, uma hora eles divergem — e aí você não sabe qual é o bom. Deixe o backup somente-leitura, ou simplesmente não o mantenha sincronizado."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": true,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o-mini",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "385597008c39bed09f7b740f43bdd0d5"
+      },
+      "ba9d505a1eb0c90acbf011dfaaf2f9ae": {
+        "id": "ba9d505a1eb0c90acbf011dfaaf2f9ae",
+        "message": {
+          "id": "54752e577ae05b180412c466d5dd46f3",
+          "author": {
+            "role": "user",
+            "name": null,
+            "metadata": {}
+          },
+          "create_time": 1780167969.0,
+          "update_time": null,
+          "content": {
+            "content_type": "text",
+            "parts": [
+              "Gostei, vou aplicar."
+            ]
+          },
+          "status": "finished_successfully",
+          "end_turn": null,
+          "weight": 1.0,
+          "metadata": {
+            "model_slug": "gpt-4o-mini",
+            "is_complete": true,
+            "message_type": null
+          },
+          "recipient": "all"
+        },
+        "parent": "e2be359702a249af427067f52b82ceaa"
+      }
+    },
+    "current_node": "ba9d505a1eb0c90acbf011dfaaf2f9ae",
+    "conversation_id": "e8a43c097d8f0f5e338f5b6a70127812",
+    "conversation_template_id": null,
+    "default_model_slug": "gpt-4o-mini",
+    "id": "e8a43c097d8f0f5e338f5b6a70127812",
+    "is_archived": false,
+    "is_do_not_remember": false,
+    "is_read_only": false,
+    "is_starred": false,
+    "is_study_mode": false,
+    "memory_scope": "global_enabled",
+    "pinned_time": null,
+    "plugin_ids": null,
+    "voice": null
+  }
+]

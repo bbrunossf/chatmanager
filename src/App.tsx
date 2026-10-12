@@ -2,7 +2,7 @@ import { useConversationManager } from './hooks/useConversationManager';
 import ConversationSidebar from './components/ConversationSidebar';
 import ConversationViewer from './components/ConversationViewer';
 import { Toaster } from './components/ui/sonner';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 /**
  * Design: Minimalismo Funcional
@@ -35,25 +35,45 @@ export default function Home() {
     exportAllConversations,
   } = useConversationManager();
 
-  // Carregar dados de exemplo do localStorage se disponível
+  // Garante que a carga inicial aconteça uma única vez
+  const cargaInicialFeita = useRef(false);
+
+  // Carrega as conversas salvas pelo usuário; se não houver nenhuma,
+  // carrega os dados de exemplo que acompanham a aplicação.
   useEffect(() => {
+    if (cargaInicialFeita.current || conversations.length > 0) return;
+    cargaInicialFeita.current = true;
+
+    const aplicar = (texto: string, nome: string) => {
+      const data = JSON.parse(texto);
+      const file = new File([JSON.stringify(data)], nome, {
+        type: 'application/json',
+      });
+      loadFromFile(file, nome);
+    };
+
     const savedConversations = localStorage.getItem('chatgpt_conversations');
     const savedFileName = localStorage.getItem('chatgpt_conversations_filename');
-    if (savedConversations && conversations.length === 0) {
+
+    if (savedConversations) {
       try {
-        const data = JSON.parse(savedConversations);
-        const file = new File(
-          [JSON.stringify(data)],
-          savedFileName ?? 'conversations.json',
-          {
-            type: 'application/json',
-          }
-        );
-        loadFromFile(file, savedFileName ?? undefined);
+        aplicar(savedConversations, savedFileName ?? 'conversations.json');
+        return;
       } catch (error) {
         console.error('Erro ao carregar conversas salvas:', error);
       }
     }
+
+    // Nada salvo: os dados de exemplo (sintéticos) evitam a tela vazia
+    fetch(`${import.meta.env.BASE_URL}sample_conversations.json`)
+      .then((resposta) => {
+        if (!resposta.ok) throw new Error(`HTTP ${resposta.status}`);
+        return resposta.text();
+      })
+      .then((texto) => aplicar(texto, 'sample_conversations.json'))
+      .catch((error) => {
+        console.warn('Não foi possível carregar os dados de exemplo:', error);
+      });
   }, [conversations.length, loadFromFile]);
 
   // Salvar conversas no localStorage sempre que mudarem

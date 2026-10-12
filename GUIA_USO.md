@@ -4,6 +4,12 @@
 
 O **ChatGPT Conversation Manager** é uma aplicação React para gerenciar, visualizar, buscar, deletar e exportar suas conversas exportadas do ChatGPT. Ele oferece uma interface limpa e intuitiva com uma barra lateral para seleção de conversas e um painel principal para visualização detalhada.
 
+> **Dados de exemplo.** Ao abrir a aplicação pela primeira vez — ou sempre que não houver
+> conversas salvas no navegador — ela carrega automaticamente o arquivo
+> `public/sample_conversations.json`: **6 conversas sintéticas, criadas para demonstração, sem
+> nenhum dado pessoal**. Para trabalhar com as suas conversas, use o botão **Carregar JSON** e
+> selecione o seu export; ele substitui os exemplos.
+
 ## 🚀 Como Usar
 
 ### 1. Carregar um Arquivo JSON

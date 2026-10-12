@@ -176,10 +176,9 @@ pnpm format
 
 ### Com Arquivo de Exemplo
 
-1. Abra a aplicação
-2. Clique em "Carregar JSON"
-3. Selecione `sample_conversations.json`
-4. Teste as funcionalidades:
+1. Abra a aplicação — os dados de exemplo (6 conversas sintéticas, em `public/sample_conversations.json`) são carregados automaticamente
+2. Para testar com um arquivo próprio, clique em "Carregar JSON" e selecione o arquivo (ele substitui os exemplos)
+3. Teste as funcionalidades:
    - Selecionar conversas
    - Buscar por título
    - Exportar individual
