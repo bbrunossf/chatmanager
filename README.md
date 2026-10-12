@@ -1,21 +1,25 @@
 # ChatGPT Conversation Manager
 
-Uma aplicação React moderna e responsiva para gerenciar, visualizar, buscar, deletar e exportar suas conversas exportadas do ChatGPT.
+Uma aplicação React moderna e responsiva para gerenciar, visualizar, buscar, organizar com tags, deletar e exportar suas conversas exportadas do ChatGPT. Roda inteiramente no navegador — **nenhum dado sai da sua máquina**.
 
 ## ✨ Funcionalidades
 
-- 📋 **Carregamento de JSON**: Importe suas conversas exportadas do ChatGPT
-- 🔍 **Busca em Tempo Real**: Encontre conversas por título instantaneamente
-- 💬 **Visualização Completa**: Veja todas as mensagens com timestamps e autores
-- 📥 **Exportação Individual**: Baixe conversas específicas em JSON
-- 📤 **Exportação em Lote**: Exporte todas as conversas de uma vez
-- 🗑️ **Gerenciamento**: Delete conversas com confirmação
-- 💾 **Persistência**: Dados salvos automaticamente no localStorage
-- 📱 **Responsivo**: Funciona perfeitamente em desktop, tablet e mobile
+- 📋 **Carregamento de JSON**: importe seu `conversations.json` exportado do ChatGPT (array de conversas ou uma conversa única)
+- 🧪 **Dados de exemplo automáticos**: sem nada salvo no navegador, a aplicação abre com 6 conversas sintéticas — nunca há tela vazia
+- 🏷️ **Tags próprias**: crie, renomeie e apague tags; aplique em uma conversa ou em várias de uma vez; filtre a lista por tag
+- 🔍 **Busca e ordenação**: busque por título em tempo real e ordene por criação ou atualização, do mais recente ao mais antigo
+- 💬 **Visualização completa**: todas as mensagens, com autor e horário formatados em pt-BR
+- 🎨 **Realce de código**: blocos de código destacados por linguagem, com botão de copiar
+- 🎙️ **Transcrições de áudio**: exibe respostas em áudio pela transcrição (`multimodal_text`)
+- 📥 **Exportação individual ou em lote**: baixe uma conversa ou todas; opção de incluir as tags no arquivo
+- 🗑️ **Exclusão individual ou em massa**: com marcação por caixa de seleção, "selecionar todas" e confirmação
+- 🔔 **Notificações**: avisos de sucesso e erro nas ações
+- 💾 **Persistência**: conversas, tags e o nome do arquivo de origem ficam salvos no `localStorage`
+- 📱 **Responsivo**: funciona em desktop, tablet e mobile
 
 ## 🎨 Design
 
-- **Minimalismo Funcional**: Interface limpa e intuitiva
+- **Minimalismo Funcional**: interface limpa e intuitiva
 - **Paleta Profissional**: Azul profundo, laranja e verde
 - **Tipografia Refinada**: Geist para títulos, Inter para corpo
 - **Animações Suaves**: Transições elegantes e fade-in em cascata
@@ -58,80 +62,94 @@ Os arquivos otimizados estarão em `dist/`
 
 ## 📖 Como Usar
 
-### Carregar Conversas
+### Conversas de exemplo
+
+Ao abrir a aplicação sem nada salvo, ela já vem com **6 conversas sintéticas** (dados de demonstração, sem conteúdo pessoal). Para trabalhar com as suas, carregue o seu export.
+
+### Carregar conversas
 
 1. Clique em **"Carregar JSON"**
 2. Selecione seu arquivo `conversations.json` do ChatGPT
-3. As conversas aparecerão na barra lateral
+3. As conversas substituem os exemplos e aparecem na barra lateral, com o nome do arquivo ao lado
 
-### Buscar
+### Organizar com tags
 
-Use o campo de busca para filtrar conversas por título em tempo real.
+- Clique em **"Adicionar tag..."** no topo da conversa aberta para criar/aplicar uma tag
+- Com conversas marcadas na barra lateral, use **"Adicionar tag"** para aplicar a mesma tag a todas
+- Renomeie ou apague tags pelo próprio chip; use o filtro de tags para ver só um grupo
+
+### Buscar e ordenar
+
+Use o campo de busca para filtrar por título em tempo real. O seletor acima da lista ordena por criação ou atualização, do mais recente ou do mais antigo.
 
 ### Visualizar
 
-Clique em uma conversa para ver todas as mensagens com timestamps e autores.
+Clique em uma conversa para ver todas as mensagens com timestamps e autores. Blocos de código aparecem com realce e botão de copiar.
 
 ### Exportar
 
-- **Individual**: Clique em "Exportar" na conversa
-- **Todas**: Clique em "Exportar Todas" no topo
+- **Individual**: clique em "Exportar" na conversa
+- **Todas**: clique em "Exportar Todas" no topo
+- Marque **"Incluir tags no export"** para que as tags vão junto no JSON
 
 ### Deletar
 
-Clique em "Deletar" e confirme. A conversa será removida.
+- **Individual**: clique em "Deletar" na conversa e confirme
+- **Em massa**: marque as conversas (ou "Selecionar todas") e use o botão de deleção da seleção
 
 ## 📁 Estrutura do Projeto
 
 ```
-chatgpt-manager/
-├── client/
-│   ├── src/
-│   │   ├── pages/          # Páginas da aplicação
-│   │   ├── components/     # Componentes React
-│   │   │   ├── ui/         # Componentes shadcn/ui
-│   │   │   ├── ConversationSidebar.tsx
-│   │   │   └── ConversationViewer.tsx
-│   │   ├── hooks/          # Custom hooks
-│   │   │   └── useConversationManager.ts
-│   │   ├── contexts/       # React contexts
-│   │   ├── lib/            # Utilitários
-│   │   ├── App.tsx         # Componente raiz
-│   │   ├── main.tsx        # Entry point
-│   │   └── index.css       # Estilos globais
-│   ├── public/             # Assets estáticos (+ sample_conversations.json)
-│   └── index.html
+chatmanager/
+├── public/
+│   ├── favicon.svg
+│   ├── icons.svg
+│   └── sample_conversations.json   # dados de exemplo carregados automaticamente
+├── src/
+│   ├── assets/                     # imagens usadas na interface
+│   ├── components/
+│   │   ├── ui/                     # componentes shadcn/ui (button, card, input, scroll-area, sonner)
+│   │   ├── ConversationSidebar.tsx # lista, busca, ordenação, tags em lote e exclusão múltipla
+│   │   └── ConversationViewer.tsx  # mensagens, realce de código e tags da conversa
+│   ├── hooks/
+│   │   └── useConversationManager.ts  # parsing, estado, tags, exportação e persistência
+│   ├── lib/utils.ts
+│   ├── App.tsx                     # composição da tela e carga inicial
+│   ├── main.tsx
+│   └── index.css
+├── index.html
+├── package.json
+├── vite.config.ts
+├── tsconfig.json / tsconfig.app.json / tsconfig.node.json
+├── eslint.config.js
+├── components.json                 # configuração do shadcn/ui
 ├── GUIA_USO.md
 └── README_DEV.md
 ```
 
 ## 🛠️ Stack Tecnológico
 
-- **React 19**: UI library
-- **TypeScript**: Type safety
-- **Vite**: Build tool
-- **Tailwind CSS 4**: Styling
-- **shadcn/ui**: UI components
-- **Wouter**: Client-side routing
-- **date-fns**: Date formatting
-- **Lucide React**: Icons
+| Biblioteca | Papel |
+|---|---|
+| **React 19** | interface |
+| **TypeScript** | tipagem |
+| **Vite** | build e servidor de desenvolvimento |
+| **Tailwind CSS 4** | estilo |
+| **shadcn/ui** (em `src/components/ui`) | componentes de interface |
+| **class-variance-authority + clsx + tailwind-merge** | variantes e composição de classes |
+| **highlight.js** | realce dos blocos de código |
+| **sonner** | notificações |
+| **date-fns** | datas em pt-BR |
+| **lucide-react** | ícones |
 
-## 📦 Dependências Principais
+As **versões exatas** estão em [`package.json`](./package.json) — deliberadamente não repetidas aqui, para não envelhecerem no README.
 
-```json
-{
-  "react": "^19.2.1",
-  "react-dom": "^19.2.1",
-  "typescript": "5.6.3",
-  "tailwindcss": "^4.1.14",
-  "vite": "^7.1.7",
-  "date-fns": "^4.3.0",
-  "lucide-react": "^0.453.0",
-  "wouter": "^3.3.5"
-}
-```
+> Duas dependências declaradas no `package.json` — `wouter` e `zod` — **não são importadas em
+> nenhum arquivo de `src/`**: são resíduos de versões anteriores e podem ser removidas.
 
 ## 🌐 Deploy
+
+A aplicação é 100% client-side (arquivos estáticos em `dist/`), então qualquer host estático serve.
 
 ### Vercel
 
@@ -149,25 +167,20 @@ netlify deploy --prod --dir=dist
 
 ### GitHub Pages
 
-Edite `vite.config.ts`:
+Defina o `base` com o nome do repositório em `vite.config.ts`:
+
 ```typescript
 export default defineConfig({
-  base: '/chatgpt-manager/',
+  base: '/chatmanager/',
   // ...
 })
 ```
 
 Depois:
+
 ```bash
 pnpm build
-# Push dist/ para gh-pages branch
-```
-
-### Docker
-
-```bash
-docker build -t chatgpt-manager .
-docker run -p 3000:3000 chatgpt-manager
+# publique o conteúdo de dist/ na branch gh-pages
 ```
 
 ## 📝 Documentação
@@ -183,9 +196,9 @@ Para testar com o seu próprio export, use o botão **Carregar JSON** — o arqu
 
 ## 💾 Persistência de Dados
 
-- Conversas são salvas automaticamente no **localStorage** do navegador
-- Nenhum dado é enviado para servidores externos
-- Limpe o cache do navegador para resetar
+- Conversas, tags e o nome do arquivo de origem são salvos automaticamente no **localStorage** do navegador
+- Nenhum dado é enviado para servidores externos — não há backend
+- Limpe o cache/dados do site no navegador para resetar (a aplicação volta a abrir com os exemplos)
 
 ## 🐛 Troubleshooting
 
@@ -205,35 +218,24 @@ pnpm dev -- --port 3000
 - Certifique-se de que foi exportado corretamente do ChatGPT
 - Teste com o exemplo em `public/sample_conversations.json`
 
-## 📄 Licença
-
-MIT - Veja LICENSE para detalhes
-
-## 🤝 Contribuindo
-
-1. Fork o repositório
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
-
-## 📞 Suporte
-
-Para problemas ou sugestões:
-- Abra uma issue no repositório
-- Verifique a documentação em GUIA_USO.md
-- Teste com o arquivo de exemplo
-
 ## 🎯 Roadmap
 
+Já entregue:
+
+- [x] Tags por conversa, aplicação em lote, renomear/apagar e filtro por tag
+- [x] Exclusão em massa com seleção
+- [x] Realce de código e notificações
+- [x] Dados de exemplo carregados automaticamente
+- [x] Ordenação por criação/atualização
+
+Pendente:
+
 - [ ] Edição de títulos de conversas
-- [ ] Tags e categorias
-- [ ] Filtro por data
-- [ ] Busca por conteúdo de mensagens
+- [ ] Filtro por período (além da ordenação)
+- [ ] Busca por conteúdo das mensagens (hoje é por título)
 - [ ] Tema escuro alternável
-- [ ] Sincronização com nuvem
-- [ ] Compartilhamento de conversas
-- [ ] Análise e estatísticas
+- [ ] Testes automatizados
+- [ ] Análise e estatísticas das conversas
 
 ## 📊 Estrutura do JSON do ChatGPT
 
@@ -251,7 +253,7 @@ Para problemas ou sugestões:
       "message": {
         "id": "message-id",
         "author": {
-          "role": "user|assistant|system"
+          "role": "user|assistant|system|tool"
         },
         "create_time": 1690996989.403809,
         "content": {
@@ -264,10 +266,19 @@ Para problemas ou sugestões:
 }
 ```
 
+Observações de compatibilidade:
+
+- o nó raiz de cada conversa tem `message: null`, e a leitura parte de `current_node` subindo por `parent`;
+- além de `content_type: "text"`, a aplicação exibe `multimodal_text` (respostas em áudio, pela parte
+  `audio_transcription`);
+- campos que a aplicação não usa (como `metadata`, `plugin_ids` ou `memory_scope`) são preservados
+  nos arquivos exportados.
+
+## 📄 Licença
+
+MIT.
+
 ---
 
-**Versão**: 1.0.0  
-**Última atualização**: Maio 2026  
-**Autor**: Desenvolvido com ❤️
-
-Aproveite! 🚀
+**Última atualização**: outubro de 2026
+**Autor**: Bruno Oliveira ([@bbrunossf](https://github.com/bbrunossf))
